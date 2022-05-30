@@ -319,7 +319,7 @@ function startTelePrompter() {
 					break;
 				}
 			}
-			truePrompterManager.setLookAhead(Math.floor(lookAhead * 1.3));
+			truePrompterManager.setLookAhead(Math.floor(lookAhead * 2.0));
 
 			lineCharsPassed += textManager.getWordSpans()[position.wordIndex].textContent.length * position.wordFraction;
 			const lerp = lineCharsPassed / lineCharsTotal;
