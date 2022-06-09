@@ -283,6 +283,14 @@ function startTelePrompter() {
 				position.wordFraction = 0.0;
 			}
 
+			for (let i = 0; i < textManager.getWordSpans().length; ++i) {
+				if (i < position.wordIndex) {
+					$(textManager.getWordSpans()[i]).css("color", "#5a5a5a");
+				} else if (i == position.wordIndex) {
+					$(textManager.getWordSpans()[i]).css("color", "#ff3333");
+				}
+			}
+
 			const currentWordSpan = $(textManager.getWordSpans()[position.wordIndex]);
 			const currentCenter = currentWordSpan.offset().top + currentWordSpan.height() / 2;
 
@@ -485,6 +493,9 @@ function startTelePrompter() {
 
 	// Clean Teleprompter
 	function clean_teleprompter() {
+		return;
+
+		// TODO should be rewritten
 		var text = $('#teleprompter').html();
 		text = text.replace(/<br>+/g, '@@').replace(/@@@@/g, '</p><p>');
 		text = text.replace(/@@/g, '<br>');
