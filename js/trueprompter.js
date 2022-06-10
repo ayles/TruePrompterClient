@@ -33,7 +33,13 @@ class TTruePrompterClient {
 
     internalConnect() {
         if (this.ws === undefined || (this.ws && this.ws.readyState === WebSocket.CLOSED)) {
-            this.ws = new WebSocket("ws://" + location.hostname + ":8080");
+            let protocol = "ws://";
+            let ending = ":8080";
+            if (location.protocol === 'https:') {
+                protocol = "wss://";
+                ending = ":443/wsapp";
+            }
+            this.ws = new WebSocket(protocol + location.hostname + ending);
             this.ws.binaryType = "arraybuffer";
             this.ws.onopen = ev => {
                 this.internalPushText();
